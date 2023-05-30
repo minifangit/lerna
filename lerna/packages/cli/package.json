@@ -1,0 +1,32 @@
+{
+  "name": "@cyfmkgruop/lerna-test-cli",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "chenyf5 <chenyf5@wangsu.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "dist/cli.js",
+  "module": "dist/cli.module.js",
+  "bin": {
+    "lerna-test-cli": "bin/cli.mjs"
+  },
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/cli.test.js"
+  },
+  "dependencies": {
+    "@cyfmkgruop/lerna-test-a": "^0.0.0",
+    "yargs": "^17.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module"
+}

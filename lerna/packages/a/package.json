@@ -1,0 +1,25 @@
+{
+  "name": "@cyfmkgruop/lerna-test-a",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "chenyf5 <chenyf5@wangsu.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/a.mjs",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/a.test.js"
+  },
+  "dependencies": {
+    "chalk": "^5.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
