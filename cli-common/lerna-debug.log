@@ -1,0 +1,21 @@
+0 silly argv {
+0 silly argv   _: [ 'add' ],
+0 silly argv   globs: [ 'packages/cli' ],
+0 silly argv   lernaVersion: '6.6.2',
+0 silly argv   '$0': 'C:\\Users\\chenyf5\\AppData\\Roaming\\npm\\node_modules\\lerna\\dist\\cli.js',
+0 silly argv   pkg: '@cyfmkgruop/cli-common-utils'
+0 silly argv }
+1 notice cli v6.6.2
+2 verbose rootPath E:\myOcean\myOcean\myOcean\脚手架\cli-common
+3 error JSONError: Unexpected token "}" (0x7D) in JSON at position 744 while parsing near "...local\": \"^3.1.0\",\n  }\n}\n" in packages\cli\package.json
+3 error
+3 error [0m [90m 31 |[39m     [32m"commander"[39m[33m:[39m [32m"^10.0.1"[39m[33m,[39m[0m
+3 error [0m [90m 32 |[39m     [32m"import-local"[39m[33m:[39m [32m"^3.1.0"[39m[33m,[39m[0m
+3 error [0m[31m[1m>[22m[39m[90m 33 |[39m   }[0m
+3 error [0m [90m    |[39m   [31m[1m^[22m[39m[0m
+3 error [0m [90m 34 |[39m }[0m
+3 error [0m [90m 35 |[39m[0m
+3 error
+3 error     at parseJson (E:\myOcean\myOcean\myOcean\脚手架\cli-common\node_modules\parse-json\index.js:29:21)
+3 error     at parse (E:\myOcean\myOcean\myOcean\脚手架\cli-common\node_modules\load-json-file\index.js:15:9)
+3 error     at module.exports (E:\myOcean\myOcean\myOcean\脚手架\cli-common\node_modules\load-json-file\index.js:18:47)

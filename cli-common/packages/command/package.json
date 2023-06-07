@@ -1,0 +1,27 @@
+{
+  "name": "@cyfmkgruop/cli-common-command",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "chenyf5 <chenyf5@wangsu.com>",
+  "homepage": "https://github.com/minifangit/lerna#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minifangit/lerna.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/command.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/minifangit/lerna/issues"
+  },
+  "type":"module"
+}
