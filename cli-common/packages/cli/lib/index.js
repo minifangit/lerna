@@ -1,19 +1,24 @@
-const commander = require('commander');
-const pkg = require('../package.json');
-const semver = require('semver');
-const chalk = require('chalk');
+import { program } from 'commander';
+import semver from 'semver';
+import { filename, dirname } from 'dirname-filename-esm';
+import fs from 'fs';
+import path from 'path';
+import chalk from 'chalk';
 
-const creatInitCommand = require('@cyfmkgruop/cli-common-init');
-const { log, isDebug } = require('@cyfmkgruop/cli-common-utils');
+//读取pageage.json的文件内容
+const __dirname = dirname(import.meta);
+const pkg = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json')).toString());
 
-const { program } = commander;
+import creatInitCommand from '@cyfmkgruop/cli-common-init';
+import { log, isDebug } from '@cyfmkgruop/cli-common-utils';
+
 const LOWEST_NODE_VERSION = '15.0.0';
 const preAction = () => {
   //检查node版本
   log.verbose('node版本号', process.version);
   //当前node版本低于LOWEST_NODE_VERSION版本时
   if (!semver.gte(process.version, LOWEST_NODE_VERSION)) {
-    throw new Error(`cli 需要安装${LOWEST_NODE_VERSION}以上的node.js版本`);
+    throw new Error(chalk.red(`cli 需要安装${LOWEST_NODE_VERSION}以上的node.js版本`));
   }
 };
 
@@ -26,7 +31,7 @@ process.on('uncaughtException', (e) => {
   }
 });
 
-module.exports = function (args) {
+export default function (args) {
   //log.info('version', pkg.version); //使用日志
   log.success('test-success', pkg.version); //使用定制的log.success
   program
@@ -46,4 +51,4 @@ module.exports = function (args) {
   creatInitCommand(program);
 
   program.parse(process.argv);
-};
+}

@@ -5,8 +5,8 @@
  const Command = require('../../command/lib'); ->即可替代为
 
  */
-const Command = require('@cyfmkgruop/cli-common-command');
-const { log } = require('@cyfmkgruop/cli-common-utils');
+import Command from '@cyfmkgruop/cli-common-command';
+import { log } from '@cyfmkgruop/cli-common-utils';
 
 class InitCommand extends Command {
   get command() {
@@ -32,6 +32,6 @@ class InitCommand extends Command {
   }
 }
 
-module.exports = function (instance) {
+export default function (instance) {
   return new InitCommand(instance);
-};
+}

@@ -1,6 +1,6 @@
 //日志
-const log = require('npmlog');
-const isDebug = require('./isDebug');
+import log from 'npmlog';
+import isDebug from './isDebug.js';
 //默认的level是info级别
 if (isDebug()) {
   log.level = 'verbose';
@@ -10,4 +10,4 @@ if (isDebug()) {
 log.heading = 'lerna cli';
 log.addLevel('success', 2000, { fg: 'green', bg: 'red', bold: true });
 
-module.exports = log;
+export default log;

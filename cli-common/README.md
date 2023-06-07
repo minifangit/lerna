@@ -37,6 +37,11 @@ const cli = require('cli');
 - chalk
 - > cli-common：lerna add chalk packages/cli 【cli 项目下安装版本比较】
 
+- 修改为 esm
+- > cli-common：lerna add fs packages/cli
+- > cli-common：lerna add fs packages/cli
+- > cli-common：lerna add path packages/cli
+
 ### 配置文件 字段解释
 
 package.json

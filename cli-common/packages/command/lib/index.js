@@ -45,4 +45,4 @@ class Command {
   preAction() {}
   postAction() {}
 }
-module.exports = Command;
+export default Command;
