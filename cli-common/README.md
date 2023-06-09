@@ -42,6 +42,10 @@ const cli = require('cli');
 - > cli-common：lerna add fs packages/cli
 - > cli-common：lerna add path packages/cli
 
+- 添加 jest 测试
+- > cli-common：lerna add jest packages/cli --dev 【dev 环境安装 jest】jest 默认集成 babel
+- > cli-common：lerna add execa packages/cli --dev 【dev 环境安装 execa】 execa 传递命令和参数来运行外部命令
+
 ### 配置文件 字段解释
 
 package.json
