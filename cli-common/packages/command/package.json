@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/minifangit/lerna/issues"
   },
-  "type":"module"
+  "type":"module",
+  "publishConfig": {
+    "access": "public"
+  }
 }

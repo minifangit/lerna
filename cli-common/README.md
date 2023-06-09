@@ -46,6 +46,13 @@ const cli = require('cli');
 - > cli-common：lerna add jest packages/cli --dev 【dev 环境安装 jest】jest 默认集成 babel
 - > cli-common：lerna add execa packages/cli --dev 【dev 环境安装 execa】 execa 传递命令和参数来运行外部命令
 
+- 发布+安装
+- > /cli-common/packages/utils> :npm publish 【发布 utils 到 npm】
+- > /cli-common/packages/command> npm publish 【发布 command 到 npm】
+- > /cli-common/packages/init> npm publish 【发布 init 到 npm】
+- > /cli-common/packages/cli> npm i 【安装 cli 的依赖】
+- > 执行命令：common-lerna-cli init aaa
+
 ### 配置文件 字段解释
 
 package.json

@@ -36,9 +36,12 @@
     "import-local": "^3.1.0",
     "path": "^0.12.7"
   },
-  "type": "module",
   "devDependencies": {
     "execa": "^7.1.1",
     "jest": "^29.5.0"
+  },
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
   }
 }
