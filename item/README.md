@@ -1,0 +1,2 @@
+- 创建模板
+- > vue create vue-template
