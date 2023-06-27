@@ -7,6 +7,7 @@
  */
 import Command from '@cyfmkgruop/cli-common-command';
 import { log } from '@cyfmkgruop/cli-common-utils';
+import createTemplate from './createTemplate.js';
 
 class InitCommand extends Command {
   get command() {
@@ -23,6 +24,10 @@ class InitCommand extends Command {
   }
   cmdAction([name, opts]) {
     log.verbose('init...', name, opts);
+    // 1.选择项目模板，生成项目信息
+    createTemplate();
+    // 2.下载项目模板至缓存目录
+    // 3.安装项目模板至项目目录
   }
   preAction() {
     console.log('preAction hook execute');

@@ -24,9 +24,12 @@
     "url": "https://github.com/minifangit/lerna/issues"
   },
   "dependencies": {
-    "npmlog": "^7.0.1"
+    "axios": "^1.4.0",
+    "inquirer": "^9.2.7",
+    "npmlog": "^7.0.1",
+    "url-join": "^5.0.0"
   },
-  "type":"module",
+  "type": "module",
   "publishConfig": {
     "access": "public"
   }
