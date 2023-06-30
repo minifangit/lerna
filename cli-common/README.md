@@ -65,7 +65,7 @@ const cli = require('cli');
 - /cli-common/packages/cli> npm i 【安装 cli 的依赖】
 - 执行命令：common-lerna-cli init aaa
 
-> 项目创建脚手架
+> 项目创建脚手架（vue、react 项目）
 
 - init -> init.js -> 【cmdAction】
 - utlis/lib -> inquirer.js 一问一答的
