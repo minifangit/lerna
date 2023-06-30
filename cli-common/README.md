@@ -74,6 +74,16 @@ const cli = require('cli');
 - cli-common：lerna add url-join packages/utils 【utils 项目项目下安装 url-join】
 - cli-common：lerna add axios packages/utils 【utils 项目项目下安装 axios】
 - utlis/lib ->npm.js 获取最新的 npm 版本号
+- cli-common：lerna add path-exists packages/init 【packages/init 下安装 path-exists】
+- cli-common：lerna add fs-extra packages/init 【packages/init 下安装 fs-extra】
+- cli-common：lerna add ora packages/init 【packages/init 下安装 ora】
+- cli-common：lerna add execa packages/init 【packages/init 下安装 execa】
+- 测试：脚手架/item> common-lerna-cli init aaa --force --debug
+
+> 测试：
+
+- 脚手架命令行方式：item：common-lerna-cli init aaa --force --type project --template vue3 项目模板 --force
+- 交互方式（一问一答模式）：common-lerna-cli init aaa --force --debug
 
 ### 配置文件 字段解释
 

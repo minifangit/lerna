@@ -8,7 +8,8 @@
 import Command from '@cyfmkgruop/cli-common-command';
 import { log } from '@cyfmkgruop/cli-common-utils';
 import createTemplate from './createTemplate.js';
-
+import downloadTemplate from './downloadTemplate.js';
+import installTemplate from './installTemplate.js';
 class InitCommand extends Command {
   get command() {
     return 'init [name]';
@@ -19,15 +20,19 @@ class InitCommand extends Command {
   get options() {
     return [
       ['-f,--force', '是否强制更新', false],
-      ['-t,--test', '是否强制更新', false]
+      ['-t,--type <type>', '项目类型（值：project/page）'], //非交互式命令,可通过脚手架参数传递数据
+      ['-tp,--template <template>', '模板名称'] //非交互式命令
     ];
   }
-  cmdAction([name, opts]) {
+  async cmdAction([name, opts]) {
     log.verbose('init...', name, opts);
     // 1.选择项目模板，生成项目信息
-    createTemplate();
+    const selectTemplate = await createTemplate(name, opts);
+    log.verbose('selectTemplate===', selectTemplate);
     // 2.下载项目模板至缓存目录
+    await downloadTemplate(selectTemplate);
     // 3.安装项目模板至项目目录
+    await installTemplate(selectTemplate, opts);
   }
   preAction() {
     console.log('preAction hook execute');
