@@ -85,6 +85,11 @@ const cli = require('cli');
 - 脚手架命令行方式：item：common-lerna-cli init aaa --force --type project --template vue3 项目模板 --force
 - 交互方式（一问一答模式）：common-lerna-cli init aaa --force --debug
 
+> 可编写项目模板
+
+- utils/lib -> request.js 【通过接口 api 获取项目模板列表】
+- RESTful 风格
+
 ### 配置文件 字段解释
 
 package.json

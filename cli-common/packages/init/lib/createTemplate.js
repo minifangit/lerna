@@ -1,13 +1,15 @@
-import { log, makeList, makeInput, getLatestVersion } from '@cyfmkgruop/cli-common-utils';
+import { log, makeList, makeInput, getLatestVersion, request } from '@cyfmkgruop/cli-common-utils';
 import { homedir } from 'node:os'; //获取系统的主目录路径
 import path from 'node:path';
 
 const ADD_TYPE_PROJECT = 'project';
 const ADD_TYPE_PAGE = 'page';
+/* 
+//通过接口获取
 const ADD_TEMPLATE = [
   { name: 'vue3项目模板', npmName: '@cyfmkgruop/item-vue-template', version: '0.0.0' },
   { name: 'react项目模板', npmName: '@cyfmkgruop/item-react-template', version: '0.0.0' }
-];
+]; */
 const ADD_TYPE = [
   { name: '项目', value: ADD_TYPE_PROJECT },
   { name: '页面', value: ADD_TYPE_PAGE }
@@ -32,7 +34,7 @@ function getAddName() {
   });
 }
 //选择项目模板
-function getAddTemplate() {
+function getAddTemplate(ADD_TEMPLATE) {
   return makeList({
     choices: ADD_TEMPLATE,
     message: '请选择项目模板'
@@ -42,7 +44,21 @@ function getAddTemplate() {
 function makeTargetPath() {
   return path.resolve(`${homedir()}/${TEMP_HOME}`, 'addTemplate');
 }
+
+//通过api获取项目模板列表
+async function getTemplateFromAPI() {
+  try {
+    const data = await request({
+      url: '/v1/project',
+      method: 'get'
+    });
+    return data;
+  } catch (error) {
+    Promise.reject(error);
+  }
+}
 export default async function createTemplate(name, opts) {
+  const ADD_TEMPLATE = await getTemplateFromAPI();
   const { type = 'project', template } = opts;
   let addType; //模板类型
   let addName; //模板名称
@@ -62,7 +78,7 @@ export default async function createTemplate(name, opts) {
     if (template) {
       addTemplate = template;
     } else {
-      addTemplate = await getAddTemplate();
+      addTemplate = await getAddTemplate(ADD_TEMPLATE);
     }
     const selectTemplate = ADD_TEMPLATE.find((item) => item.name === addTemplate);
     if (!selectTemplate) {
