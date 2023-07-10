@@ -90,6 +90,20 @@ const cli = require('cli');
 - utils/lib -> request.js 【通过接口 api 获取项目模板列表】
 - RESTful 风格
 
+> 根据不同团队区分不同模板
+
+- init->lib-> createTemplate.js (getTeamList)
+
+> ejs 模板渲染引擎
+
+> golb 匹配文件路径
+
+```
+glob("**/*.js",{ignore:['node_modeles/**']},function(){})
+**表示任意路径
+
+```
+
 ### 配置文件 字段解释
 
 package.json

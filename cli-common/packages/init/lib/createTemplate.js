@@ -34,6 +34,15 @@ function getAddName() {
   });
 }
 //选择项目模板
+function getTeamList(list) {
+  return makeList({
+    choices: list.map((item) => {
+      return { name: item, value: item };
+    }),
+    message: '请选择团队类型'
+  });
+}
+//选择项目模板
 function getAddTemplate(ADD_TEMPLATE) {
   return makeList({
     choices: ADD_TEMPLATE,
@@ -63,6 +72,7 @@ export default async function createTemplate(name, opts) {
   let addType; //模板类型
   let addName; //模板名称
   let addTemplate; //模板类型
+  let addTeam = ''; //团队类型
   if (type) {
     addType = type;
   } else {
@@ -78,9 +88,13 @@ export default async function createTemplate(name, opts) {
     if (template) {
       addTemplate = template;
     } else {
-      addTemplate = await getAddTemplate(ADD_TEMPLATE);
+      //去重数据库字段team字段
+      const teamList = [...new Set(ADD_TEMPLATE.map((item) => item.team))];
+      addTeam = await getTeamList(teamList);
+      addTemplate = await getAddTemplate(ADD_TEMPLATE.filter((item) => item.team === addTeam));
+      log.verbose('addTemplate==', addTemplate);
     }
-    const selectTemplate = ADD_TEMPLATE.find((item) => item.name === addTemplate);
+    const selectTemplate = ADD_TEMPLATE.find((item) => item.value === addTemplate);
     if (!selectTemplate) {
       throw new Error(`项目模板${addTemplate}不存在`);
     }
