@@ -28,10 +28,10 @@ const ejsRenderFile = async (filePath) => {
   try {
     const result = await ejs.renderFile(filePath, {
       data: {
-        name: 'vue-template'
+        name: 'vue-template-ejs'
       }
     });
-    log.verbose('ejsRenderFile====', result);
+    //log.verbose('ejsRenderFile====', result);
     fse.writeFileSync(filePath, result);
   } catch (error) {
     log.error(error);
