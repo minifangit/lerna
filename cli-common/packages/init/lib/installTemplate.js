@@ -2,6 +2,8 @@ import path from 'node:path';
 import fse from 'fs-extra'; //创建目录
 import { pathExistsSync } from 'path-exists'; //同步检查路径是否存在
 import ora from 'ora';
+import ejs from 'ejs';
+import { globSync } from 'glob';
 import { log } from '@cyfmkgruop/cli-common-utils';
 
 //获取缓存目录
@@ -21,6 +23,37 @@ function copyFile(targetPath, template, installDir) {
   log.success('模板拷贝成功！！！');
 }
 
+//模板渲染
+const ejsRenderFile = async (filePath) => {
+  try {
+    const result = await ejs.renderFile(filePath, {
+      data: {
+        name: 'vue-template'
+      }
+    });
+    log.verbose('ejsRenderFile====', result);
+    fse.writeFileSync(filePath, result);
+  } catch (error) {
+    log.error(error);
+  }
+};
+async function ejsRender(installDir) {
+  log.verbose('installDir======', installDir);
+  try {
+    const jsfiles = await globSync('**', {
+      cwd: installDir, //搜索的工作目录
+      nodir: true, //不匹配目录，不单独读文件夹目录
+      ignore: ['**/public/**', '**/node_modules/**'] //排除文件
+    });
+    jsfiles.forEach((file) => {
+      log.verbose('glob======', file);
+      const filePath = path.join(installDir, file);
+      ejsRenderFile(filePath);
+    });
+  } catch (error) {
+    log.error(error);
+  }
+}
 export default function installTemplate(selectTemplate, opt) {
   const { force = false } = opt;
   const { targetPath, name, template } = selectTemplate;
@@ -41,4 +74,5 @@ export default function installTemplate(selectTemplate, opt) {
 
   //拷贝目录
   copyFile(targetPath, template, installDir);
+  ejsRender(installDir);
 }

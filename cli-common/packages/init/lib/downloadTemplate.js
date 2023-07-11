@@ -33,6 +33,6 @@ export default async function downloadTemplate(selectTemplate) {
   } catch (error) {
     Promise.reject(error);
   } finally {
-    setTimeout(() => spinner.stop(), 2000);
+    setTimeout(() => spinner.stop(), 0);
   }
 }

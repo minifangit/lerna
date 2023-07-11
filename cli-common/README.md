@@ -96,6 +96,9 @@ const cli = require('cli');
 
 > ejs 模板渲染引擎
 
+- cli-common：lerna add ejs packages/init 【packages/init 下安装 ejs】
+- cli-common：lerna add glob packages/init 【packages/init 下安装 ejs】
+
 > golb 匹配文件路径
 
 ```
