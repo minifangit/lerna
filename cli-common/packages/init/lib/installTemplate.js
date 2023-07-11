@@ -8,7 +8,7 @@ import { log } from '@cyfmkgruop/cli-common-utils';
 
 //获取缓存目录
 function getCacheDFilePath(targetPath, template) {
-  return path.resolve(targetPath, 'node_modules', template.npmName);
+  return path.resolve(targetPath, 'node_modules', template.npmName, 'template');
 }
 
 function copyFile(targetPath, template, installDir) {
