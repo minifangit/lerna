@@ -98,6 +98,7 @@ const cli = require('cli');
 
 - cli-common：lerna add ejs packages/init 【packages/init 下安装 ejs】
 - cli-common：lerna add glob packages/init 【packages/init 下安装 ejs】
+  cli-common：lerna add url packages/init 【packages/init 下安装 url】
   可以更改<% =data.name %>的指令做替换
 
 > golb 匹配文件路径
@@ -107,6 +108,12 @@ glob("**/*.js",{ignore:['node_modeles/**']},function(){})
 **表示任意路径
 
 ```
+
+### 模板
+
+- 在 template 的 vue-template 下新增 plugins
+  在 cli-common -> init -> lib 下添加 getPluginFilePath()和(await import(pluginPath)).default;读取文件内容，
+  这样可以直接更新 template 下的 app.vue 带有 esj 的<%= %>的语法
 
 ### 配置文件 字段解释
 

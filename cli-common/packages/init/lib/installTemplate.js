@@ -3,6 +3,7 @@ import fse from 'fs-extra'; //创建目录
 import { pathExistsSync } from 'path-exists'; //同步检查路径是否存在
 import ora from 'ora';
 import ejs from 'ejs';
+import { fileURLToPath, pathToFileURL } from 'url';
 import { globSync } from 'glob';
 import { log } from '@cyfmkgruop/cli-common-utils';
 
@@ -10,7 +11,10 @@ import { log } from '@cyfmkgruop/cli-common-utils';
 function getCacheDFilePath(targetPath, template) {
   return path.resolve(targetPath, 'node_modules', template.npmName, 'template');
 }
-
+function getPluginFilePath(targetPath, template) {
+  //对于文件路径添加file://前缀
+  return 'file://' + path.resolve(targetPath, 'node_modules', template.npmName, 'plugins', 'index.js');
+}
 function copyFile(targetPath, template, installDir) {
   const originFile = getCacheDFilePath(targetPath, template);
   log.verbose('文件是否存在===', pathExistsSync(originFile));
@@ -33,10 +37,25 @@ const ejsRenderFile = async (filePath, ejsData) => {
     log.error(error);
   }
 };
-async function ejsRender(installDir, template) {
+async function initPluginData(targetPath, template) {
+  // 执行插件
+  let data = {};
+  const pluginPath = getPluginFilePath(targetPath, template);
+  if (pathExistsSync(pluginPath)) {
+    const pluginFn = (await import(pluginPath)).default;
+    const api = {
+      makeList,
+      makeInput
+    };
+    data = await pluginFn(api);
+  }
+  return data;
+}
+async function ejsRender(installDir, template, targetPath) {
   log.verbose('installDir======', installDir);
   try {
     const { ignor, value } = template;
+    const dataPlugin = await initPluginData(targetPath, template);
     const jsfiles = await globSync('**', {
       cwd: installDir, //搜索的工作目录
       nodir: true, //不匹配目录，不单独读文件夹目录
@@ -47,7 +66,8 @@ async function ejsRender(installDir, template) {
       const filePath = path.join(installDir, file);
       ejsRenderFile(filePath, {
         data: {
-          name: value
+          name: value,
+          ...dataPlugin
         }
       });
     });
@@ -75,5 +95,5 @@ export default function installTemplate(selectTemplate, opt) {
 
   //拷贝目录
   copyFile(targetPath, template, installDir);
-  ejsRender(installDir, template);
+  ejsRender(installDir, template, targetPath);
 }
