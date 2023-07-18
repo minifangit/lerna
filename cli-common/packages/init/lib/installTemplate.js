@@ -24,31 +24,32 @@ function copyFile(targetPath, template, installDir) {
 }
 
 //模板渲染
-const ejsRenderFile = async (filePath) => {
+const ejsRenderFile = async (filePath, ejsData) => {
   try {
-    const result = await ejs.renderFile(filePath, {
-      data: {
-        name: 'vue-template-ejs'
-      }
-    });
+    const result = await ejs.renderFile(filePath, ejsData);
     //log.verbose('ejsRenderFile====', result);
     fse.writeFileSync(filePath, result);
   } catch (error) {
     log.error(error);
   }
 };
-async function ejsRender(installDir) {
+async function ejsRender(installDir, template) {
   log.verbose('installDir======', installDir);
   try {
+    const { ignor, value } = template;
     const jsfiles = await globSync('**', {
       cwd: installDir, //搜索的工作目录
       nodir: true, //不匹配目录，不单独读文件夹目录
-      ignore: ['**/public/**', '**/node_modules/**'] //排除文件
+      ignore: [...ignor, '**/node_modules/**'] //排除文件
     });
     jsfiles.forEach((file) => {
       log.verbose('glob======', file);
       const filePath = path.join(installDir, file);
-      ejsRenderFile(filePath);
+      ejsRenderFile(filePath, {
+        data: {
+          name: value
+        }
+      });
     });
   } catch (error) {
     log.error(error);
@@ -62,7 +63,7 @@ export default function installTemplate(selectTemplate, opt) {
   const installDir = path.resolve(`${rootDir}/${name}`); //生成安装目录路径
   if (pathExistsSync(installDir)) {
     if (!force) {
-      log.error(`当前目录下已存在 ${instalLDir} 文件夹~`);
+      log.error(`当前目录下已存在 ${installDir} 文件夹~`);
       return;
     } else {
       fse.removeSync(installDir); //同步步方式删除目录的方法
@@ -74,5 +75,5 @@ export default function installTemplate(selectTemplate, opt) {
 
   //拷贝目录
   copyFile(targetPath, template, installDir);
-  ejsRender(installDir);
+  ejsRender(installDir, template);
 }

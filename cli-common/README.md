@@ -98,6 +98,7 @@ const cli = require('cli');
 
 - cli-common：lerna add ejs packages/init 【packages/init 下安装 ejs】
 - cli-common：lerna add glob packages/init 【packages/init 下安装 ejs】
+  可以更改<% =data.name %>的指令做替换
 
 > golb 匹配文件路径
 
